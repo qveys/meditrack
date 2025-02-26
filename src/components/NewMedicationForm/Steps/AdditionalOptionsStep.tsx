@@ -1,5 +1,5 @@
 import React from 'react';
-import { Info, Calendar, Clock, ChevronRight, Pencil } from 'lucide-react';
+import { Info, Calendar, Clock, ChevronRight, Pencil, Check } from 'lucide-react';
 import { useTheme } from '../../../ThemeContext';
 import { StepProps } from '../types';
 
@@ -9,23 +9,29 @@ export function AdditionalOptionsStep({ formData, setFormData }: StepProps) {
   const options = [
     {
       icon: Calendar,
+      isChecked: ['days', 'endDate', 'ongoing'].includes(formData.treatmentDurationOption || ''),
       label: 'Définir la durée de traitement',
-      action: () => {/* TODO: Implement duration selection */},
+      action: () => setFormData({ ...formData, showTreatmentStartDate: true }),
     },
     {
       icon: Clock,
+      isChecked: formData.renewalReminderCount && formData.remainingPills,
       label: 'Programmer un rappel de renouvellement',
-      action: () => {/* TODO: Implement renewal reminder */},
+      action: () => setFormData({ ...formData, showRemainingPills: true }),
     },
+    /*
     {
       icon: Info,
+      isChecked: false,
       label: 'Ajouter des instructions',
-      action: () => {/* TODO: Implement additional instructions */},
+      action: () => setFormData({ ...formData, showInstructions: true }),
     },
+    */
     {
       icon: Pencil,
+      isChecked: false,
       label: 'Changer cette icône de médicament',
-      action: () => {/* TODO: Implement icon selection */},
+      action: () => setFormData({ ...formData, showIconPicker: true }),
     },
   ];
 
@@ -37,7 +43,7 @@ export function AdditionalOptionsStep({ formData, setFormData }: StepProps) {
         </div>
         <h3 className="text-lg font-semibold">Options additionnelles</h3>
       </div>
-      {options.map(({ icon: Icon, label, action }) => (
+      {options.map(({ icon: Icon, label, action, isChecked }) => (
         <button
           key={label}
           onClick={action}
@@ -49,7 +55,7 @@ export function AdditionalOptionsStep({ formData, setFormData }: StepProps) {
             <Icon className="w-5 h-5" />
             <span>{label}</span>
           </div>
-          <ChevronRight className="w-5 h-5" />
+          {isChecked ? <Check className="w-5 h-5 text-lime-400" /> : <ChevronRight className="w-5 h-5" />}
         </button>
       ))}
     </div>

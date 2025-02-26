@@ -3,19 +3,19 @@ import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTheme } from '../../../ThemeContext';
 import { StepProps } from '../types';
 
-export function WeeklyIntervalStep({ formData, setFormData }: StepProps) {
+export function DailyIntervalStep({ formData, setFormData }: StepProps) {
   const { isDark } = useTheme();
-  const [weekInterval, setWeekInterval] = React.useState(formData.weekInterval || 1);
+  const [interval, setInterval] = React.useState(formData.interval || 2);
   const [currentPage, setCurrentPage] = React.useState(0);
 
-  // Générer les options de 1 à 21 semaines
-  const intervals = Array.from({ length: 21 }, (_, i) => i + 1);
+  // Générer les options de 2 à 60 jours
+  const intervals = Array.from({ length: 59 }, (_, i) => i + 2);
   const itemsPerPage = 4;
   const totalPages = Math.ceil(intervals.length / itemsPerPage);
 
   const handleIntervalChange = (value: number) => {
-    setWeekInterval(value);
-    setFormData({ ...formData, weekInterval: value });
+    setInterval(value);
+    setFormData({ ...formData, interval: value });
   };
 
   const getCurrentPageItems = () => {
@@ -29,11 +29,11 @@ export function WeeklyIntervalStep({ formData, setFormData }: StepProps) {
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-cyan-500/10">
           <Calendar className="w-6 h-6 text-cyan-500" />
         </div>
-        <h3 className="text-lg font-semibold">Configurer les intervalles de semaines</h3>
+        <h3 className="text-lg font-semibold">Configurer les intervalles de jours</h3>
       </div>
 
       <div className="flex flex-col items-center">
-        <p className="text-lg mb-6 text-cyan-500">Toutes les</p>
+        <p className="text-lg mb-6 text-cyan-500">Tous les</p>
         
         <div className="flex items-center gap-4 mb-6">
           <button
@@ -59,7 +59,7 @@ export function WeeklyIntervalStep({ formData, setFormData }: StepProps) {
                 key={value}
                 onClick={() => handleIntervalChange(value)}
                 className={`w-16 h-16 rounded-lg text-2xl font-semibold transition-all duration-150 ${
-                  weekInterval === value
+                  interval === value
                     ? 'bg-cyan-500 text-white scale-110 shadow-lg'
                     : isDark
                     ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
@@ -90,7 +90,7 @@ export function WeeklyIntervalStep({ formData, setFormData }: StepProps) {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <p className="text-lg text-cyan-500">semaines</p>
+          <p className="text-lg text-cyan-500">jours</p>
           <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
             {currentPage + 1} / {totalPages}
           </p>

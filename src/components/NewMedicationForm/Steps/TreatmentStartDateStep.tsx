@@ -2,16 +2,20 @@ import React from 'react';
 import { Calendar } from 'lucide-react';
 import { useTheme } from '../../../ThemeContext';
 import { StepProps } from '../types';
-import { format, getDaysInMonth } from 'date-fns';
+import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
-export function DatePickerStep({ formData, setFormData }: StepProps) {
+export function TreatmentStartDateStep({ formData, setFormData }: StepProps) {
   const { isDark } = useTheme();
   const today = new Date();
   
   const [selectedDate, setSelectedDate] = React.useState(() => {
+    if (formData.startDate) {
+      return new Date(formData.startDate);
+    }
     const date = new Date();
-    date.setHours(0, 0, 0, 0);
+    date.setDate(date.getDate());
+    setFormData({...formData, startDate: format(date, 'yyyy-MM-dd')});
     return date;
   });
 
@@ -32,7 +36,7 @@ export function DatePickerStep({ formData, setFormData }: StepProps) {
   }, []);
 
   const days = React.useMemo(() => {
-    const daysInMonth = getDaysInMonth(selectedDate);
+    const daysInMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0).getDate();
     return Array.from({ length: daysInMonth }, (_, i) => i + 1);
   }, [selectedDate.getFullYear(), selectedDate.getMonth()]);
 
@@ -46,7 +50,7 @@ export function DatePickerStep({ formData, setFormData }: StepProps) {
       case 'month':
         newDate.setMonth(value);
         // Ajuster le jour si nécessaire (ex: 31 mars -> 30 avril)
-        const daysInNewMonth = getDaysInMonth(newDate);
+        const daysInNewMonth = new Date(newDate.getFullYear(), value + 1, 0).getDate();
         if (newDate.getDate() > daysInNewMonth) {
           newDate.setDate(daysInNewMonth);
         }
@@ -59,7 +63,7 @@ export function DatePickerStep({ formData, setFormData }: StepProps) {
     setSelectedDate(newDate);
     setFormData({
       ...formData,
-      startDate: format(newDate, 'yyyy-MM-dd')
+      endDate: format(newDate, 'yyyy-MM-dd')
     });
   };
 
@@ -69,7 +73,7 @@ export function DatePickerStep({ formData, setFormData }: StepProps) {
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-cyan-500/10">
           <Calendar className="w-6 h-6 text-cyan-500" />
         </div>
-        <h3 className="text-lg font-semibold">Quand devez-vous prendre la prochaine dose ?</h3>
+        <h3 className="text-lg font-semibold">Quand ce traitement doit-il débuter ?</h3>
       </div>
 
       <div className="space-y-4">
@@ -129,22 +133,11 @@ export function DatePickerStep({ formData, setFormData }: StepProps) {
           </div>
         </div>
 
-        <button
-          onClick={() => {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            setSelectedDate(today);
-            setFormData({
-              ...formData,
-              startDate: format(today, 'yyyy-MM-dd')
-            });
-          }}
-          className={`w-full p-3 rounded-lg text-center transition-colors duration-150 ${
-            isDark ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'
-          }`}
-        >
-          Aujourd'hui
-        </button>
+        <div className={`mt-4 p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
+          <p className="text-sm">
+            {selectedDate.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0) ? "Aujourd'hui" : `Dans ${Math.ceil((selectedDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))} jours`}
+          </p>
+        </div>
       </div>
     </div>
   );
