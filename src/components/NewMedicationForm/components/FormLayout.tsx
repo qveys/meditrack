@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, ChevronLeft } from 'lucide-react';
 import { useTheme } from '../../../ThemeContext';
 import { StepIndicator } from './StepIndicator';
@@ -21,6 +21,25 @@ export function FormLayout({
   footer
 }: FormLayoutProps) {
   const { isDark } = useTheme();
+
+  // Ajouter un gestionnaire d'événements pour la touche Enter
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        // Trouver le bouton dans le footer
+        const footerButton = document.querySelector('[data-footer-button]') as HTMLButtonElement;
+        if (footerButton && !footerButton.disabled) {
+          footerButton.click();
+        }
+      }
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -47,7 +66,9 @@ export function FormLayout({
         </div>
 
         <div className="p-6 border-t border-gray-200">
-          {footer}
+          {React.cloneElement(footer as React.ReactElement, {
+            'data-footer-button': true
+          })}
         </div>
       </div>
     </div>
