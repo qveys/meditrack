@@ -29,10 +29,10 @@ export function MedicationsList() {
   };
 
   return (
-    <div className={`h-screen flex flex-col transition-colors duration-150 ${
+    <div className={`min-h-screen transition-colors duration-150 ${
       isDark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
     }`}>
-      <header className={`sticky top-0 z-10 p-4 transition-colors duration-150 ${
+      <header className={`p-4 transition-colors duration-150 ${
         isDark ? 'bg-gray-800' : 'bg-white'
       } shadow-md`}>
         <div className="flex justify-between items-center">
@@ -47,8 +47,8 @@ export function MedicationsList() {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-        <div className="p-4 pb-24 space-y-4">
+      <main className="p-4 pb-24">
+        <div className="space-y-4">
           {Object.values(uniqueMedications).length === 0 ? (
             <div className={`text-center py-8 ${
               isDark ? 'text-gray-400' : 'text-gray-500'
