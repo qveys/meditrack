@@ -46,6 +46,10 @@ export function useCalendar() {
   const dates = getWeekDates(currentWeekStart);
 
   const handleDateSelection = (date: Date) => {
+
+    console.log("use");
+    console.log(date);
+    
     const currentDateStr = selectedDate.toISOString().split('T')[0];
     const newDateStr = date.toISOString().split('T')[0];
     
@@ -69,27 +73,13 @@ export function useCalendar() {
     newStart.setDate(currentWeekStart.getDate() + (direction === 'next' ? 7 : -7));
     setCurrentWeekStart(newStart);
     
-    // Gérer les cas spéciaux pour lundi et dimanche
-    const currentDay = selectedDate.getDay();
-    const newSelectedDate = new Date(selectedDate);
-
-    if (direction === 'prev' && currentDay === 1) {
-      // Si on est lundi et qu'on va en arrière, on sélectionne le dimanche précédent
-      newSelectedDate.setDate(selectedDate.getDate() - 1);
-    } else if (direction === 'next' && currentDay === 0) {
-      // Si on est dimanche et qu'on va en avant, on sélectionne le lundi suivant
-      newSelectedDate.setDate(selectedDate.getDate() + 1);
-    } else {
-      // Sinon, on garde le même jour de la semaine
-      newSelectedDate.setDate(selectedDate.getDate() + (direction === 'next' ? 7 : -7));
-    }
-
-    setSelectedDate(newSelectedDate);
-    setSlideDirection(direction === 'next' ? 'left' : 'right');
+    const selectedTime = selectedDate.getTime();
+    const weekStart = newStart.getTime();
+    const weekEnd = new Date(newStart).setDate(newStart.getDate() + 6);
     
-    setTimeout(() => {
-      setSlideDirection(null);
-    }, 150);
+    if (selectedTime < weekStart || selectedTime > weekEnd) {
+      setSelectedDate(new Date(newStart));
+    }
   };
 
   return {
