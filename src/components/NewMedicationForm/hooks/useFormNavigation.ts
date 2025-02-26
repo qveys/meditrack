@@ -8,50 +8,52 @@ interface UseFormNavigationProps {
 export function useFormNavigation({ formData }: UseFormNavigationProps) {
   const [step, setStep] = useState(1);
 
-  const shouldShowTimesPerDay = formData.frequency === 'Chaque jour';
-  const shouldShowWeekDays = formData.frequency === 'Certains jours de la semaine';
-  const shouldShowCycle = formData.frequency === 'Cycle récurrent';
+  const isFrequencyCycleRecurrent = formData.frequency === 'Cycle récurrent';
+  const isTimesPerDayCycleRecurrent = formData.timesPerDay === 'Cycle récurrent';
+  const isTimesPerDayPlusDe3Fois = formData.timesPerDay === 'Plus de 3 fois par jour';
+  const isTimesPerDayToutesHeures = formData.timesPerDay === 'Toutes les x heures';
+  const isStandardCycle = (isFrequencyCycleRecurrent || isTimesPerDayCycleRecurrent) && formData.cycleLength === 28 && formData.cycleFrequency === 0;
 
   const getTotalSteps = useCallback(() => {
-    let steps = 5; // Base steps
-    if (shouldShowTimesPerDay) steps++;
-    if (shouldShowWeekDays) steps++;
-    if (shouldShowCycle) steps++;
-    return steps;
-  }, [shouldShowTimesPerDay, shouldShowWeekDays, shouldShowCycle]);
+    if (isFrequencyCycleRecurrent || isTimesPerDayCycleRecurrent || isTimesPerDayPlusDe3Fois || isTimesPerDayToutesHeures) {
+      return !isStandardCycle && isTimesPerDayCycleRecurrent ? 9 : (!isStandardCycle && isFrequencyCycleRecurrent ? 8 : 7);
+    }
+    return 6; // Étapes par défaut
+  }, [isFrequencyCycleRecurrent, isTimesPerDayCycleRecurrent, isTimesPerDayPlusDe3Fois, isTimesPerDayToutesHeures, isStandardCycle]);
 
   const getAdjustedStep = useCallback(() => {
-    let adjusted = step;
-    if (step > 3) {
-      if (!shouldShowTimesPerDay && !shouldShowWeekDays && !shouldShowCycle && step > 3) adjusted++;
-      if (shouldShowWeekDays && !shouldShowTimesPerDay && step > 4) adjusted++;
-      if (!shouldShowWeekDays && shouldShowTimesPerDay && step > 4) adjusted++;
-      if (shouldShowCycle && step > 4) adjusted++;
+    if (!isFrequencyCycleRecurrent && !isTimesPerDayCycleRecurrent) return step;
+
+    // Pour le cycle 28+0:
+    // 1. Name
+    // 2. Form
+    // 3. Frequency
+    // 4. CycleOptions
+    // 5. CycleStep
+    // 6. TimeAndDose
+    // 7. Additional
+
+    if (isStandardCycle) {
+      switch (step) {
+        case 5: return 5; // CycleStep
+        case 6: return 6; // TimeAndDose
+        case 7: return 7; // Additional
+        default: return step;
+      }
     }
-    return adjusted;
-  }, [step, shouldShowTimesPerDay, shouldShowWeekDays, shouldShowCycle]);
+
+    return step;
+  }, [step, isFrequencyCycleRecurrent, isTimesPerDayCycleRecurrent, isStandardCycle]);
 
   const handleNext = useCallback(() => {
-    if (step === 3) {
-      if (!shouldShowTimesPerDay && !shouldShowWeekDays && !shouldShowCycle) {
-        setStep(5); // Skip to time selection
-      } else {
-        setStep(step + 1);
-      }
-    } else {
-      setStep(step + 1);
-    }
-  }, [step, shouldShowTimesPerDay, shouldShowWeekDays, shouldShowCycle]);
+    setStep(step + 1);
+  }, [step]);
 
   const handleBack = useCallback(() => {
     if (step > 1) {
-      if (step === 5 && !shouldShowTimesPerDay && !shouldShowWeekDays && !shouldShowCycle) {
-        setStep(3); // Skip back over step 4
-      } else {
-        setStep(step - 1);
-      }
+      setStep(step - 1);
     }
-  }, [step, shouldShowTimesPerDay, shouldShowWeekDays, shouldShowCycle]);
+  }, [step]);
 
   return {
     step,
