@@ -10,12 +10,21 @@ export interface MedicationForm {
   interval: number;
   weekInterval: number;
   monthInterval: number;
+  customTimes: number;
   startDate?: string;
+  endDate?: string;
+  treatmentDuration?: number;
   icon: string;
   color: string;
   additionalInstructions?: string;
-  treatmentDuration?: string;
-  renewalReminder?: boolean;
+  treatmentDurationOption?: 'days' | 'endDate' | 'ongoing';
+  showTreatmentDuration?: boolean;
+  showTreatmentDurationEndDate?: boolean;
+  showCustomDuration?: boolean;
+  showRenewalReminder?: boolean;
+  showInstructions?: boolean;
+  showIconPicker?: boolean;
+  usePlacebo?: boolean;
 }
 
 export interface StepProps {
