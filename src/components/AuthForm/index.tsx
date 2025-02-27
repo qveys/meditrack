@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTheme } from '../../ThemeContext';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth.ts';
 
 export function AuthForm() {
   const { isDark } = useTheme();

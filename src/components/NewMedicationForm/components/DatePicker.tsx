@@ -1,7 +1,5 @@
 import React from 'react';
-import { useTheme } from '../../../ThemeContext';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { useTheme } from '@/ThemeContext.tsx';
 import { generateYearOptions, generateMonthOptions, generateDayOptions } from '../utils/dateUtils';
 
 interface DatePickerProps {

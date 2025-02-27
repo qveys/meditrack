@@ -1,4 +1,3 @@
-import React from 'react';
 import { Home, Calendar, Pill, MoreHorizontal } from 'lucide-react';
 import { useTheme } from '../../ThemeContext';
 

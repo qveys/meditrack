@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { MedicationForm } from '../types';
 
 interface FormAnalytics {
   stepStartTime: number;
@@ -17,8 +16,7 @@ export function useFormAnalytics() {
   };
 
   const trackStepCompletion = useCallback((step: number) => {
-    const completionTime = Date.now() - analytics.stepStartTime;
-    analytics.stepCompletionTimes[step] = completionTime;
+    analytics.stepCompletionTimes[step] = Date.now() - analytics.stepStartTime;
     analytics.stepStartTime = Date.now();
   }, []);
 

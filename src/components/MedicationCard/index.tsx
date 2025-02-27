@@ -1,9 +1,8 @@
-import React from 'react';
 import { useTheme } from '../../ThemeContext';
 import { MedicationIcon } from './components/MedicationIcon';
 import { MedicationInfo } from './components/MedicationInfo';
 import { ActionButtons } from './components/ActionButtons';
-import type { Medication } from '../../types/medication';
+import type { Medication } from '@/types/medication.ts';
 
 interface MedicationCardProps {
   medication: Medication;

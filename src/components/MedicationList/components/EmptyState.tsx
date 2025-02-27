@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 
 export function EmptyState() {
   const { isDark } = useTheme();

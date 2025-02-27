@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bell } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function RenewalReminderStep({ formData, setFormData }: StepProps) {

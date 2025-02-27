@@ -1,6 +1,3 @@
-import React from 'react';
-import { useTheme } from '../../../ThemeContext';
-
 interface StepFooterProps {
   onNext: () => void;
   isSubmitting?: boolean;
@@ -9,8 +6,6 @@ interface StepFooterProps {
 }
 
 export function StepFooter({ onNext, isSubmitting, isLastStep, canProceed }: StepFooterProps) {
-  const { isDark } = useTheme();
-
   return (
     <button
       onClick={onNext}

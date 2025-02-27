@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function MonthlyIntervalStep({ formData, setFormData }: StepProps) {

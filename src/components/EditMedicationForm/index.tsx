@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { useTheme } from '../../ThemeContext';
-import { ICON_OPTIONS, COLOR_OPTIONS } from '../../constants';
-import type { Medication } from '../../types/medication';
+import { ICON_OPTIONS, COLOR_OPTIONS } from '@/constants';
+import type { Medication } from '@/types/medication.ts';
 
 interface EditMedicationFormProps {
   medication: Medication;

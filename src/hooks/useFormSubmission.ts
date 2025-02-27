@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { MedicationForm } from '../types';
+import { MedicationForm } from "@/components/NewMedicationForm/types.ts";
 
 interface UseFormSubmissionProps {
   onAdd: (medication: {
@@ -18,7 +18,7 @@ export function useFormSubmission({ onAdd, onClose, formData }: UseFormSubmissio
 
   const formatDosageText = useCallback((formData: MedicationForm) => {
     const timesText = formData.times
-      .map(t => `${t.dose} ${formData.form}${t.dose !== '1' ? 's' : ''} à ${t.time}`)
+      .map((t: { dose: string; time: string }) => `${t.dose} ${formData.form}${t.dose !== '1' ? 's' : ''} à ${t.time}`)
       .join(', ');
 
     const frequencyText = getFrequencyText(formData);

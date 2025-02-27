@@ -31,7 +31,7 @@ export function useFormProgress() {
       return 'Médicaments restants';
     }
 
-    const labels = {
+    const labels: { [key: number]: string } = {
       1: 'Nom',
       2: 'Forme',
       3: 'Fréquence',

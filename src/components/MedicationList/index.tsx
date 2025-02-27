@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { useTheme } from '../../ThemeContext';
+import { useState } from 'react';
 import { EmptyState } from './components/EmptyState';
 import { TimeGroup } from './components/TimeGroup';
 import { useAnimatedTransition } from './hooks/useAnimatedTransition';
-import type { Medication } from '../../types/medication';
+import type { Medication } from '@/types/medication.ts';
 
 interface MedicationListProps {
   medications: Medication[];
@@ -22,7 +21,6 @@ export function MedicationList({
   slideDirection,
   onMedicationAction 
 }: MedicationListProps) {
-  const { isDark } = useTheme();
   const [displayDate, setDisplayDate] = useState(selectedDate);
     
   const timeToMinutes = (time: string): number => {

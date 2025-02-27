@@ -26,7 +26,7 @@ import {
   TreatmentStartDateStep,
   CustomDurationStep,
 } from './Steps';
-import { ICON_OPTIONS, COLOR_OPTIONS } from '../../constants';
+import { ICON_OPTIONS, COLOR_OPTIONS } from '@/constants';
 import type { MedicationForm } from './types';
 
 interface NewMedicationFormProps {
@@ -58,7 +58,7 @@ export function NewMedicationForm({ onClose, onAdd }: NewMedicationFormProps) {
     startDate: new Date().toISOString().split('T')[0],
   });
 
-  const { step, totalSteps, adjustedStep, handleNext, handleBack } = useFormNavigation({ formData });
+  const { totalSteps, adjustedStep, handleNext, handleBack } = useFormNavigation({ formData });
   const { error, isSubmitting, handleSubmit } = useFormSubmission({ onAdd, onClose, formData });
 
   const renderStep = () => {
@@ -290,9 +290,9 @@ export function NewMedicationForm({ onClose, onAdd }: NewMedicationFormProps) {
     if (formData.showTreatmentStartDate) {
       if (formData.showTreatmentDuration) {
         if (formData.showTreatmentEndDate) {
-          setFormData({ ...formData, showTreatmentEndDate: false, treatmentDurationOption: null });
+          setFormData({ ...formData, showTreatmentEndDate: false, treatmentDurationOption: undefined });
         } else if (formData.showCustomDuration) {
-          setFormData({ ...formData, showCustomDuration: false, treatmentDurationOption: null, treatmentDuration: null });
+          setFormData({ ...formData, showCustomDuration: false, treatmentDurationOption: undefined, treatmentDuration: undefined });
         } else {
           setFormData({ ...formData, showTreatmentDuration: false });
         }

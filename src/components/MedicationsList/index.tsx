@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '../../ThemeContext';
-import { useMedications } from '../../hooks/useMedications';
+import { useMedications } from '@/hooks/useMedications.ts';
 import { Edit2, Trash2, Plus } from 'lucide-react';
 import { EditMedicationForm } from '../EditMedicationForm';
 import { NewMedicationForm } from '../NewMedicationForm/index';
-import type { Medication } from '../../types/medication';
+import type { Medication } from '@/types/medication.ts';
 
 export function MedicationsList() {
   const { isDark } = useTheme();
@@ -22,8 +22,8 @@ export function MedicationsList() {
   }, {} as Record<string, Medication>);
 
   const handleDelete = async (medicationId: string) => {
-    const { error } = await deleteMedication(medicationId);
-    if (!error) {
+    const result = await deleteMedication(medicationId);
+    if (result && !result.error) {
       setDeleteConfirmation(null);
     }
   };
@@ -134,7 +134,10 @@ export function MedicationsList() {
         <EditMedicationForm
           medication={editingMedication}
           onClose={() => setEditingMedication(null)}
-          onUpdate={updateMedication}
+          onUpdate={async (medicationId: string, updates: { name: string; dosage: string; icon: string; color: string; }) => {
+            const result = await updateMedication(medicationId, updates);
+            return { error: result?.error || null };
+          }}
         />
       )}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pill } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function RemainingPillsStep({ formData, setFormData }: StepProps) {

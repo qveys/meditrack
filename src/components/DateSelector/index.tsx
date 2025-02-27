@@ -1,7 +1,6 @@
-import React from 'react';
 import { NavigationButton } from './components/NavigationButton';
 import { DateButton } from './components/DateButton';
-import type { CalendarDate } from '../../hooks/useCalendar';
+import { CalendarDate } from '@/types/calendar.ts';
 
 interface DateSelectorProps {
   dates: CalendarDate[];

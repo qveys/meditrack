@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { MedicationForm } from '../types';
-import { ICON_OPTIONS, COLOR_OPTIONS } from '../../../constants';
+import { ICON_OPTIONS, COLOR_OPTIONS } from '@/constants';
 import { generateDefaultTimes } from '../utils/timeUtils';
 
 const initialFormState: MedicationForm = {

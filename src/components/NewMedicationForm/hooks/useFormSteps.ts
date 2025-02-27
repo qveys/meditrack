@@ -27,7 +27,7 @@ export function useFormSteps() {
     if (!isFrequencyCycle && !isTimesPerDayCycle) return step;
 
     if (isStandardCycle) {
-      const stepMapping = {
+      const stepMapping: { [key: number]: number } = {
         5: 5, // CycleStep
         6: 6, // TimeAndDose
         7: 7, // Additional

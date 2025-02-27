@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { MedicationForm } from '../types';
+import { MedicationForm } from "@/components/NewMedicationForm/types.ts";
 
 interface UseFormNavigationProps {
   formData: MedicationForm;
@@ -31,7 +31,7 @@ export function useFormNavigation({ formData }: UseFormNavigationProps) {
 
     // Ajuster l'étape pour les cycles standards (28+0)
     if (isStandardCycle) {
-      const stepMapping = {
+      const stepMapping: Record<number, number> = {
         5: 5, // CycleStep
         6: 6, // TimeAndDose
         7: 7, // Additional

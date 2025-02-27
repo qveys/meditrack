@@ -1,8 +1,7 @@
-import React from 'react';
 import { ChevronDown } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { MedicationCard } from '../../MedicationCard';
-import type { Medication } from '../../../types/medication';
+import type { Medication } from '@/types/medication.ts';
 
 interface TimeGroupProps {
   time: string;

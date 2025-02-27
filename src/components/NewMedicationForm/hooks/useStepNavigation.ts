@@ -66,13 +66,13 @@ export function useStepNavigation({ formData, updateFormData }: UseStepNavigatio
       if (formData.showTreatmentEndDate) {
         updateFormData({ 
           showTreatmentEndDate: false, 
-          treatmentDurationOption: null 
+          treatmentDurationOption: undefined
         });
       } else if (formData.showCustomDuration) {
         updateFormData({ 
           showCustomDuration: false, 
-          treatmentDurationOption: null, 
-          treatmentDuration: null 
+          treatmentDurationOption: undefined,
+          treatmentDuration: undefined
         });
       } else {
         updateFormData({ showTreatmentDuration: false });

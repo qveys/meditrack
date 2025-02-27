@@ -22,7 +22,7 @@ interface ReminderData {
 
 export function useMedications() {
   const [medications, setMedications] = useState<Medication[]>([]);
-  const { scheduleNotification, cancelNotification } = useNotifications();
+  const { scheduleNotification } = useNotifications();
   const { user } = useAuth();
 
   const loadMedications = useCallback(async () => {

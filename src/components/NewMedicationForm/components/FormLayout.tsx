@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, ChevronLeft } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepIndicator } from './StepIndicator';
 
 interface FormLayoutProps {

@@ -1,6 +1,5 @@
-import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 
 interface PageControlsProps {
   currentPage: number;

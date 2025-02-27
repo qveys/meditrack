@@ -1,6 +1,5 @@
-import React from 'react';
 import { Calendar } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 import { WEEKDAYS } from '../constants';
 
@@ -8,12 +7,10 @@ export function WeekdaysStep({ formData, setFormData }: StepProps) {
   const { isDark } = useTheme();
 
   const toggleWeekday = (day: string) => {
-    setFormData(prev => {
-      const selectedDays = prev.selectedDays.includes(day)
-        ? prev.selectedDays.filter(d => d !== day)
-        : [...prev.selectedDays, day];
-      return { ...prev, selectedDays };
-    });
+    const selectedDays = formData.selectedDays.includes(day)
+      ? formData.selectedDays.filter((d: string) => d !== day)
+      : [...formData.selectedDays, day];
+    setFormData({ ...formData, selectedDays });
   };
 
   return (

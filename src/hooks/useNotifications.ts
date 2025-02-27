@@ -1,10 +1,7 @@
-import { useEffect, useCallback } from 'react';
-import { useTheme } from '../ThemeContext';
+import { useCallback } from 'react';
 import type { Medication } from '../types/medication';
 
 export function useNotifications() {
-  const { isDark } = useTheme();
-
   const requestPermission = useCallback(async () => {
     if (!('Notification' in window)) {
       console.log('This browser does not support notifications');

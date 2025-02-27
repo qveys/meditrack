@@ -1,6 +1,5 @@
-import React from 'react';
 import { Calendar } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 const DURATION_OPTIONS = [

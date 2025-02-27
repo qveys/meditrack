@@ -8,7 +8,7 @@ interface UseFormFlowProps {
 
 export function useFormFlow({ formData, updateFormData }: UseFormFlowProps) {
   const showTreatmentDurationFlow = useCallback(() => {
-    updateFormData({ showTreatmentStartDate: true });
+    updateFormData({ timesPerDay: "", showTreatmentStartDate: true });
   }, [updateFormData]);
 
   const showRenewalReminderFlow = useCallback(() => {
@@ -45,13 +45,13 @@ export function useFormFlow({ formData, updateFormData }: UseFormFlowProps) {
       if (formData.showTreatmentEndDate) {
         updateFormData({
           showTreatmentEndDate: false,
-          treatmentDurationOption: null
+          treatmentDurationOption: undefined
         });
       } else if (formData.showCustomDuration) {
         updateFormData({
           showCustomDuration: false,
-          treatmentDurationOption: null,
-          treatmentDuration: null
+          treatmentDurationOption: undefined,
+          treatmentDuration: undefined
         });
       } else {
         updateFormData({ showTreatmentDuration: false });

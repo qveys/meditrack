@@ -1,6 +1,5 @@
-import React from 'react';
 import { Info, Calendar, Clock, ChevronRight, Pencil, Check } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function AdditionalOptionsStep({ formData, setFormData }: StepProps) {

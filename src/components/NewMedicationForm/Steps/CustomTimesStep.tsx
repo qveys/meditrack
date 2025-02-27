@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function CustomTimesStep({ formData, setFormData }: StepProps) {

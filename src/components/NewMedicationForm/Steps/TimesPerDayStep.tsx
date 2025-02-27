@@ -1,6 +1,5 @@
-import React from 'react';
 import { Clock } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 import { TIMES_PER_DAY } from '../constants';
 
@@ -9,7 +8,7 @@ export function TimesPerDayStep({ formData, setFormData }: StepProps) {
 
   // Initialiser les prises en fonction de l'option sélectionnée
   const initializeTimes = (option: string) => {
-    let times = [];
+    let times: any[];
     switch (option) {
       case 'Deux fois par jour':
         times = [

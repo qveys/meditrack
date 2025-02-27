@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 import { StepProps } from '../types';
 
 export function NameStep({ formData, setFormData }: StepProps) {

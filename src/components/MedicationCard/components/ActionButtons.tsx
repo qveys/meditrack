@@ -1,6 +1,5 @@
-import React from 'react';
 import { Undo2 } from 'lucide-react';
-import { useTheme } from '../../../ThemeContext';
+import { useTheme } from '@/ThemeContext.tsx';
 
 interface ActionButtonsProps {
   status: string;
