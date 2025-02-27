@@ -1,16 +1,9 @@
 import { useState, useCallback } from 'react';
-
-export interface CalendarDate {
-  day: string;
-  date: number;
-  fullDate: string;
-  isSelected: boolean;
-  isToday: boolean;
-}
+import type { CalendarDate, Calendar } from "@/types/calendar";
 
 const WEEK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-export function useCalendar() {
+export function useCalendar() : Calendar {
   const [currentWeekStart, setCurrentWeekStart] = useState(() => {
     const today = new Date();
     const day = today.getDay();

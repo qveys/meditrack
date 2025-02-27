@@ -1,14 +1,13 @@
-import React from 'react';
 import { Plus, Sun, Moon, LogOut } from 'lucide-react';
 import { useTheme } from '../../ThemeContext';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth.ts';
 import { DateSelector } from '../DateSelector';
 import type { User } from '@supabase/supabase-js';
-import type { CalendarHookResult } from '../../hooks/useCalendar';
+import { Calendar } from "@/types/calendar.ts";
 
 interface HeaderProps {
   onAddMedication: () => void;
-  calendar: CalendarHookResult;
+  calendar: Calendar;
   user: User;
 }
 
